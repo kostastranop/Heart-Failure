@@ -7,8 +7,19 @@ name = "heart"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-    "pandas", "numpy", "scikit-learn", "matplotlib", "seaborn",
-    "lightgbm", "xgboost", "catboost", "mlflow", "shap", "optuna", "pyyaml",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "matplotlib",
+    "seaborn",
+    "lightgbm",
+    "xgboost",
+    "catboost",
+    "mlflow",
+    "shap",
+    "optuna",
+    "pyyaml",
+    "great-expectations>=1.24.0",
 ]
 
 [project.optional-dependencies]
