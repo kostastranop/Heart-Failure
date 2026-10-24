@@ -63,7 +63,7 @@ def validate(df):
     return results.success, failed_expectations
 
 # Data loading function
-def load_raw(path=cfg.RAW_PATH):
+def load_raw(path=cfg.DATA_RAW):
     df = pd.read_csv(path)
     validate(df)
     return df

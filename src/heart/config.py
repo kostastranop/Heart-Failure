@@ -19,7 +19,7 @@ FEATURE_COLS = NUM_COLS + BINARY_COLS + NOMINAL_COLS
 
 # Missing values
 ZERO_AS_MISSING = ["Cholesterol", "RestingBP"]
-MISSING_FLAG = {"Cholesterol": "chol_missing"}
+MISSING_FLAG = "chol_missing"
 
 # Categorical levels
 CATEGORY_LEVELS = {
