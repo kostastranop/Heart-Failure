@@ -9,3 +9,4 @@ mlartifacts/
 mlflow.db
 data/processed/
 context/
+CLAUDE.md

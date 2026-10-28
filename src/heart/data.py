@@ -79,3 +79,9 @@ def make_splits(df, test_size=cfg.TEST_SIZE, seed=cfg.SEED):
     return train_test_split(
         X, y, test_size=test_size, stratify=strata, random_state=seed
     )
+
+# Save the holdout split once, so later phases use the exact same rows
+def save_splits(X_train, X_test, y_train, y_test):
+    cfg.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+    X_train.assign(**{cfg.TARGET: y_train}).to_csv(cfg.TRAIN_CSV, index=False)
+    X_test.assign(**{cfg.TARGET: y_test}).to_csv(cfg.TEST_CSV, index=False)
