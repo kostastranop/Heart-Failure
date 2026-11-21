@@ -8,6 +8,14 @@ TRAIN_CSV = DATA_PROCESSED / "train.csv"
 TEST_CSV = DATA_PROCESSED / "test.csv"
 FIGURES = ROOT / "reports" / "figures"
 
+# MLflow: runs and model registry in a local SQLite file, run artifacts in mlruns/
+# (both gitignored). The registry needs a database store, a plain folder is not enough.
+MLFLOW_TRACKING_URI = f"sqlite:///{(ROOT / 'mlflow.db').as_posix()}"
+MLFLOW_ARTIFACTS = ROOT / "mlruns"
+EXPERIMENT_NAME = "heart-disease"
+# Registry name; the app loads f"models:/{REGISTERED_MODEL}@champion"
+REGISTERED_MODEL = "heart-disease"
+
 # Constants
 SEED = 42
 TEST_SIZE = 0.2
@@ -33,6 +41,15 @@ CATEGORY_LEVELS = {
     "FastingBS": [0, 1],
     TARGET: [0, 1],
 }
+
+# Cross-validation: same repeated 10-fold scheme as 02_modeling.ipynb,
+# so the CV numbers logged by train.py match the notebook.
+CV_SPLITS = 10
+CV_REPEATS = 5
+# Bootstrap resamples of the test set, for the 95% interval around each test score
+N_BOOTSTRAP = 1000
+# Shuffles per feature for permutation importance (gives the error bars)
+N_PERMUTATION_REPEATS = 30
 
 # Chosen models (Phase 3 summary in 02_modeling.ipynb)
 # logreg is the champion: tied with the forest on CV, but simpler and fully interpretable.

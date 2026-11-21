@@ -72,3 +72,13 @@ def build_model(name, seed=cfg.SEED, **prep_overrides):
  
     estimator, prep = get_specs(seed)[name]
     return make_pipeline(build_preprocessor(**{**prep, **prep_overrides}), estimator)
+
+
+def build_tuned_model(name: str):
+    """Same pipeline as build_model, with the Optuna best params from config.BEST_PARAMS.
+
+    Used by train.py so a retrain reproduces the tuned models of 02_modeling.ipynb exactly.
+    """
+    pipeline = build_model(name)
+    pipeline[-1].set_params(**cfg.BEST_PARAMS[name])
+    return pipeline

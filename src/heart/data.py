@@ -81,6 +81,14 @@ def make_splits(df, test_size=cfg.TEST_SIZE, seed=cfg.SEED):
         X, y, test_size=test_size, stratify=strata, random_state=seed
     )
 
+# Read the saved holdout split, so training uses exactly the rows from Phase 3
+def load_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+    """Return X_train, X_test, y_train, y_test from data/processed/ (written by save_splits)."""
+    train = pd.read_csv(cfg.TRAIN_CSV)
+    test = pd.read_csv(cfg.TEST_CSV)
+    return train[cfg.FEATURE_COLS], test[cfg.FEATURE_COLS], train[cfg.TARGET], test[cfg.TARGET]
+
+
 # Save the holdout split once, so later phases use the exact same rows
 def save_splits(X_train, X_test, y_train, y_test):
     cfg.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
