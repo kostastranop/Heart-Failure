@@ -10,3 +10,4 @@ mlflow.db
 data/processed/
 context/
 CLAUDE.md
+reports/experiments/*.pkl

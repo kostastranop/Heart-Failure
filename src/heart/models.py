@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
+from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
  
@@ -25,6 +26,13 @@ def get_specs(seed=cfg.SEED):
         "logreg": (LogisticRegression(max_iter=1000), {}),
         # Distance-based: needs scaled inputs, so it keeps the default preprocessing.
         "knn": (KNeighborsClassifier(n_neighbors=15), {}),
+        # Kernel method: also distance-based, so it keeps the default preprocessing too.
+        # Added in 04_preprocessing.ipynb; probability=True (Platt scaling) gives the
+        # predict_proba needed for the Brier score.
+        "svm": (
+            SVC(kernel="rbf", C=1.0, gamma="scale", probability=True, random_state=seed),
+            {},
+        ),
         # Trees: no scaling, no clipping.
         "decision_tree": (DecisionTreeClassifier(max_depth=4, random_state=seed), TREE_PREP),
         "random_forest": (

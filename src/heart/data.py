@@ -1,9 +1,10 @@
-import pandas as pd
 import great_expectations as gx
 import great_expectations.expectations as gxe
+import pandas as pd
 from sklearn.model_selection import train_test_split
- 
+
 from heart import config as cfg
+
 
 # Data validation function with great expectations
 def validate(df):
