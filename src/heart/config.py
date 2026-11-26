@@ -42,6 +42,18 @@ CATEGORY_LEVELS = {
     TARGET: [0, 1],
 }
 
+# API input limits (app/schemas.py): (min, max) of what the API accepts for each numeric feature.
+# These are physiologically plausible limits, deliberately wider than the training data
+# (shown in comments), so real but unusual patients are accepted while typos and unit mix-ups
+# (e.g. cholesterol in mmol/L, temperature typed into MaxHR) are rejected with a 422.
+INPUT_RANGES = {
+    "Age": (18, 100),           # years, train 28-77; the dataset covers adults only
+    "RestingBP": (60, 250),     # mmHg, train 80-200 (one 0 = recording error)
+    "Cholesterol": (50, 700),   # mg/dL, train 85-603; "not measured" is sent as null, not 0
+    "MaxHR": (50, 230),         # bpm, train 60-202
+    "Oldpeak": (-3.0, 10.0),    # mm of ST depression, train -2.6-6.2
+}
+
 # Cross-validation: same repeated 10-fold scheme as 02_modeling.ipynb,
 # so the CV numbers logged by train.py match the notebook.
 CV_SPLITS = 10

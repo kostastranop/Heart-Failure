@@ -39,5 +39,9 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.pytest.ini_options]
+# Repo root on the import path so tests can import the app/ folder (heart/ is installed)
+pythonpath = ["."]
+
 [tool.ruff]
 line-length = 100
